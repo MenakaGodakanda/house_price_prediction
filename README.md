@@ -55,7 +55,19 @@ jupyter notebook
 ![Screenshot 2025-02-01 023927](https://github.com/user-attachments/assets/885ad912-5b88-47e2-a72d-eee534ff52e5)
 
 ### 1. Load the dataset:
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+# Load dataset
+data_path = "../data/housing.csv"
+df = pd.read_csv(data_path)
+
+# Show first few rows
+df.head()
+```
 ![Screenshot 2025-02-01 013456](https://github.com/user-attachments/assets/1bcba95f-4f0d-49cb-bef2-6599e049ee25)
 
 ### 2. Basic Data Info:
@@ -78,6 +90,7 @@ plt.title('Distribution of House Prices')
 plt.show()
 ```
 ![Screenshot 2025-02-01 013628](https://github.com/user-attachments/assets/65f84790-62bf-4162-a226-447e8d991a14)
+<br><br>
 ![Screenshot 2025-02-01 013640](https://github.com/user-attachments/assets/ad5c91f5-9353-4028-adc7-aa6dca124480)
 
 ### 5. Data Preprocessing:
@@ -94,28 +107,23 @@ print(X_train.shape, X_test.shape)
 ```
 ![Screenshot 2025-02-01 014158](https://github.com/user-attachments/assets/7ad6a081-64d2-4cbe-a591-71c129c1f79a)
 
+Training the Model
+```
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Model Coefficients
+print("Model Coefficients:", model.coef_)
+```
 ![Screenshot 2025-02-01 013941](https://github.com/user-attachments/assets/a008e21c-6054-4baf-b2d7-7e98a129bb46)
 
-Training the Model
 ```
 print("Model Coefficients:", model.coef_)
 ```
 ![Screenshot 2025-02-01 014209](https://github.com/user-attachments/assets/049191c9-8390-4a53-99dc-72459d10b463)
 
-### 7. Model Evaluation:
-```
-print(f"Mean Absolute Error: {mae}")
-print(f"Mean Squared Error: {mse}")
-print(f"R² Score: {r2}")
-```
-
-### 8. Making Predictions:
-```
-sample_data = [[-118.32, 34.21, 25.0, 4000.0, 800.0, 1500.0, 750.0, 5.0]]
-prediction = model.predict(sample_data)
-print(f"Predicted House Price: {prediction[0]}")
-```
-![Screenshot 2025-02-01 014421](https://github.com/user-attachments/assets/6132d650-a19d-4602-802c-b9b24529dc0f)
 
 ## Train the Model
 Ensure the dataset is available in the data/ directory. Run the training script:
