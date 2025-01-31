@@ -123,6 +123,7 @@ Ensure the dataset is available in the data/ directory. Run the training script:
 python3 src/train.py
 ```
 This will preprocess the data, train a regression model, and save the trained model in `models/`.
+![Screenshot 2025-02-01 015304](https://github.com/user-attachments/assets/03c9fddd-e8f0-4ab6-bc75-8a0c1aaa6e66)
 
 ## Making Predictions
 Use the trained model to predict house prices:
@@ -130,6 +131,8 @@ Use the trained model to predict house prices:
 python3 src/predict.py -118.32 34.21 25.0 4000.0 800.0 1500.0 750.0 5.0 "NEAR OCEAN"
 ```
 Example Output:
+![Screenshot 2025-02-01 015619](https://github.com/user-attachments/assets/8250619e-e985-425e-91a0-03581925af97)
+
 
 ## Troubleshooting
 ### FileNotFoundError
