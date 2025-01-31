@@ -31,8 +31,73 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 ### 3. Install dependencies:
+We will use `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, and `jupyter`:
+```
+pip install pandas numpy matplotlib seaborn scikit-learn jupyter
+```
+## Getting the Dataset
+We will use the Kaggle House Prices Dataset. Download the dataset and place it inside `data/`.
+```
+mkdir data
+cd data
+wget https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.csv
+```
+## Exploratory Data Analysis (EDA)
+Create a Jupyter notebook inside notebooks/. Start Jupyter Notebook:
+```
+jupyter notebook
+```
 
-## Installation
+### 1. Load the dataset:
+
+### 2. Basic Data Info:
+```
+df.info()
+```
+
+### 3. Summary Statistics:
+```
+df.describe()
+```
+
+### 4. Data Visualization:
+```
+plt.figure(figsize=(8,6))
+sns.histplot(df['median_house_value'], bins=30, kde=True)
+plt.title('Distribution of House Prices')
+plt.show()
+```
+
+### 5. Data Preprocessing:
+Handling Missing Values
+```
+print(df.isnull().sum())
+```
+
+### 6. Model Training:
+Train-Test Split
+```
+print(X_train.shape, X_test.shape)
+```
+
+Training the Model
+```
+print("Model Coefficients:", model.coef_)
+```
+
+### 7. Model Evaluation:
+```
+print(f"Mean Absolute Error: {mae}")
+print(f"Mean Squared Error: {mse}")
+print(f"R² Score: {r2}")
+```
+
+### 8. Making Predictions:
+```
+sample_data = [[-118.32, 34.21, 25.0, 4000.0, 800.0, 1500.0, 750.0, 5.0]]
+prediction = model.predict(sample_data)
+print(f"Predicted House Price: {prediction[0]}")
+```
 
 ## Train the Model
 Ensure the dataset is available in the data/ directory. Run the training script:
