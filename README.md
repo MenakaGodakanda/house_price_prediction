@@ -94,14 +94,60 @@ plt.show()
 ![Screenshot 2025-02-01 013640](https://github.com/user-attachments/assets/ad5c91f5-9353-4028-adc7-aa6dca124480)
 
 ### 5. Data Preprocessing:
-Handling Missing Values
+#### Handling Missing Values
+Check for missing values
 ```
 print(df.isnull().sum())
 ```
 ![Screenshot 2025-02-01 013703](https://github.com/user-attachments/assets/97e7ae9e-0d18-4f73-b6be-49b6198fc05e)
 
-### 6. Model Training:
-Train-Test Split
+Fill missing values with median
+```
+# Fill numeric columns with median
+df[df.select_dtypes(include=['number']).columns] = df.select_dtypes(include=['number']).fillna(df.median())
+
+# Fill categorical columns with mode (most frequent value)
+df[df.select_dtypes(include=['object']).columns] = df.select_dtypes(include=['object']).fillna(df.mode().iloc[0])
+```
+#### Encoding Categorical Data
+```
+df = pd.get_dummies(df, drop_first=True)
+```
+
+#### Feature Scaling
+```
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
+# One-hot encode categorical variables (excluding target column)
+df_encoded = pd.get_dummies(df.drop('median_house_value', axis=1), drop_first=True)
+
+# Initialize the scaler
+scaler = StandardScaler()
+
+# Scale only the numeric features
+scaled_features = scaler.fit_transform(df_encoded)
+
+# Convert back to DataFrame with correct column names
+df_scaled = pd.DataFrame(scaled_features, columns=df_encoded.columns)
+
+# Add the target variable back
+df_scaled['median_house_value'] = df['median_house_value']
+
+# Display the first few rows
+df_scaled.head()
+```
+
+### 6. Splitting Data & Building a Model:
+#### Train-Test Split
+```
+from sklearn.model_selection import train_test_split
+
+X = df_scaled.drop('median_house_value', axis=1)
+y = df_scaled['median_house_value']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
 ```
 print(X_train.shape, X_test.shape)
 ```
@@ -119,10 +165,27 @@ print("Model Coefficients:", model.coef_)
 ```
 ![Screenshot 2025-02-01 013941](https://github.com/user-attachments/assets/a008e21c-6054-4baf-b2d7-7e98a129bb46)
 
+### 7. Model Evaluation:
 ```
-print("Model Coefficients:", model.coef_)
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+y_pred = model.predict(X_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Absolute Error: {mae}")
+print(f"Mean Squared Error: {mse}")
+print(f"R² Score: {r2}")
 ```
-![Screenshot 2025-02-01 014209](https://github.com/user-attachments/assets/049191c9-8390-4a53-99dc-72459d10b463)
+
+###  8. Saving the Model
+```
+import joblib
+
+joblib.dump(model, "../models/house_price_model.pkl")
+```
 
 
 ## Train the Model
