@@ -209,7 +209,9 @@ joblib.dump(model, "../models/house_price_model.pkl")
 
 ## Making Predictions
 Use the trained model to predict house prices:
-- Change the input data for prediction in `predict.py`
+- Change the input data for prediction in `predict.py`<br>
+![Screenshot 2025-02-02 050111](https://github.com/user-attachments/assets/dce882c9-9dd1-445c-93ef-69cf55b1e140)
+
 - Run `predict.py`:
 ```
 python3 src/predict.py
