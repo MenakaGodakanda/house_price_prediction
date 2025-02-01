@@ -50,6 +50,7 @@ wget https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing
 ## Exploratory Data Analysis (EDA)
 Create a Jupyter notebook inside notebooks/. Start Jupyter Notebook:
 ```
+cd notebooks
 jupyter notebook
 ```
 ![Screenshot 2025-02-01 023927](https://github.com/user-attachments/assets/885ad912-5b88-47e2-a72d-eee534ff52e5)
@@ -80,7 +81,7 @@ df.info()
 ```
 df.describe()
 ```
-![Screenshot 2025-02-01 013605](https://github.com/user-attachments/assets/c58cd65a-0e1b-4ca8-8dac-19c2db70298e)
+![Screenshot 2025-02-01 153238](https://github.com/user-attachments/assets/80425664-5755-43e3-8668-72484de833c2)
 
 ### 4. Data Visualization:
 ```
@@ -137,6 +138,7 @@ df_scaled['median_house_value'] = df['median_house_value']
 # Display the first few rows
 df_scaled.head()
 ```
+![Screenshot 2025-02-01 153658](https://github.com/user-attachments/assets/fbb1be13-9e70-4ed0-bee8-fedc5c3b76b6)
 
 ### 6. Splitting Data & Building a Model:
 #### Train-Test Split
@@ -151,7 +153,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 ```
 print(X_train.shape, X_test.shape)
 ```
-![Screenshot 2025-02-01 014158](https://github.com/user-attachments/assets/7ad6a081-64d2-4cbe-a591-71c129c1f79a)
+![Screenshot 2025-02-01 153750](https://github.com/user-attachments/assets/85d86a49-413c-4591-9377-9581eea16bd1)
 
 Training the Model
 ```
@@ -163,7 +165,8 @@ model.fit(X_train, y_train)
 # Model Coefficients
 print("Model Coefficients:", model.coef_)
 ```
-![Screenshot 2025-02-01 013941](https://github.com/user-attachments/assets/a008e21c-6054-4baf-b2d7-7e98a129bb46)
+![Screenshot 2025-02-01 153811](https://github.com/user-attachments/assets/e7663db8-3889-4341-9865-0c5b1f2c8530)
+
 
 ### 7. Model Evaluation:
 ```
@@ -179,6 +182,7 @@ print(f"Mean Absolute Error: {mae}")
 print(f"Mean Squared Error: {mse}")
 print(f"R² Score: {r2}")
 ```
+![Screenshot 2025-02-01 153836](https://github.com/user-attachments/assets/f7299dd1-81ed-424b-9083-e3ed7c2b73a7)
 
 ###  8. Saving the Model
 ```
@@ -186,42 +190,28 @@ import joblib
 
 joblib.dump(model, "../models/house_price_model.pkl")
 ```
-
-
-## Train the Model
-Ensure the dataset is available in the data/ directory. Run the training script:
-```
-python3 src/train.py
-```
-This will preprocess the data, train a regression model, and save the trained model in `models/`.
-![Screenshot 2025-02-01 015304](https://github.com/user-attachments/assets/03c9fddd-e8f0-4ab6-bc75-8a0c1aaa6e66)
+![Screenshot 2025-02-01 153853](https://github.com/user-attachments/assets/6223fefd-f735-462e-b735-6363113dc0a8)
 
 ## Making Predictions
 Use the trained model to predict house prices:
+- Input data for prediction in 'predict.py'
+- Run `predict.py`:
 ```
-python3 src/predict.py -118.32 34.21 25.0 4000.0 800.0 1500.0 750.0 5.0 "NEAR OCEAN"
+python3 src/predict.py
 ```
 Example Output:
-![Screenshot 2025-02-01 015619](https://github.com/user-attachments/assets/8250619e-e985-425e-91a0-03581925af97)
-
-
-## Troubleshooting
-### FileNotFoundError
-- Ensure you have trained the model before predicting: `python3 src/train.py`
-
-### ValueError
-- Make sure `predict.py` uses the same feature order as `train.py`.
-- Re-run `train.py` and verify the feature count.
+![Screenshot 2025-02-01 162214](https://github.com/user-attachments/assets/db91a892-77b1-4d24-bef8-2d6556324f5b)
 
 ## Project Structure
 ```
 house_price_prediction/
-│── data/                    # Dataset storage
-│── models/                  # Trained model storage
-│── src/                     # Source code
-│   │── train.py             # Model training script
-│   │── predict.py           # Prediction script
-│── README.md                # Project documentation
+│── data/                                # Dataset storage
+│   │── housing.csv                      # Dataset
+│── models/                              # Trained model storage
+│   │── house_price_model.pkl            # Prediction model
+│── src/                                 # Source code
+│   │── predict.py                       # Prediction script
+│── notebooks                            # Jupiter notebooks
 ```
 
 ## License
