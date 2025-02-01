@@ -155,7 +155,9 @@ print(X_train.shape, X_test.shape)
 ```
 ![Screenshot 2025-02-01 153750](https://github.com/user-attachments/assets/85d86a49-413c-4591-9377-9581eea16bd1)
 
-Training the Model
+This means 16,512 data points for training and 4,128 for testing.
+
+#### Training the Model
 ```
 from sklearn.linear_model import LinearRegression
 
@@ -167,6 +169,7 @@ print("Model Coefficients:", model.coef_)
 ```
 ![Screenshot 2025-02-01 153811](https://github.com/user-attachments/assets/e7663db8-3889-4341-9865-0c5b1f2c8530)
 
+These are the weights the model assigns to different features.
 
 ### 7. Model Evaluation:
 ```
@@ -184,6 +187,18 @@ print(f"R² Score: {r2}")
 ```
 ![Screenshot 2025-02-01 153836](https://github.com/user-attachments/assets/f7299dd1-81ed-424b-9083-e3ed7c2b73a7)
 
+- **Mean Absolute Error (MAE)**: On average, the predicted house prices deviate by $50,670.74 from the actual prices.
+- **Mean Squared Error (MSE)**: The large number shows the squared error, which penalizes larger mistakes more than smaller ones. Since house prices are in the hundreds of thousands, squared errors become very large.
+- **Coefficient of Determination (R²)**: 62.54% of the variability in house prices is explained by the model.
+
+**Is This Model Good?**
+- Not bad, but not great
+- 62.54% R² suggests a moderate model.
+- The high MAE ($50K error) may need improvements, like:
+  - Feature engineering (adding better predictors)
+  - Non-linear models (e.g., Random Forest, XGBoost)
+  - Hyperparameter tuning
+
 ###  8. Saving the Model
 ```
 import joblib
@@ -199,7 +214,7 @@ Use the trained model to predict house prices:
 ```
 python3 src/predict.py
 ```
-Example Output:
+Example Output:<br>
 ![Screenshot 2025-02-01 162214](https://github.com/user-attachments/assets/db91a892-77b1-4d24-bef8-2d6556324f5b)
 
 ## Project Structure
